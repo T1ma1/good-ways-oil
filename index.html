@@ -37,32 +37,70 @@
 </div>
 
 <header class="nav" id="nav">
+  <div class="nav__top">
+    <div class="wrap nav__top-in mono">
+      <span class="nav__top-l"><a href="https://good-ways-oil.ru/dostavka">Доставка</a><a href="https://good-ways-oil.ru/oplata">Оплата</a><a href="https://good-ways-oil.ru/ispytaniya-v-realnyh-usloviyah">Испытания в реальных условиях</a></span>
+      <span class="nav__top-r"><span>с 10:00 до 19:00 по Москве</span><a href="mailto:oils@good-ways.ru">oils@good-ways.ru</a><a href="tel:+78007757870">+7 (800) 775-78-70</a></span>
+    </div>
+  </div>
   <div class="wrap nav__in">
     <a class="nav__logo" href="#top" aria-label="Good Ways — на главную">
       <img src="assets/img/logo.svg" alt="Good Ways" width="987" height="136">
     </a>
     <nav class="nav__links" aria-label="Основное меню">
-      <a href="#story">Компания</a>
-      <a href="#formula">Технология</a>
       <a href="#catalog">Каталог</a>
+      <a href="#story">Компания</a>
       <a href="#test">Good Ways Test</a>
       <a href="#partners">Партнёрам</a>
+      <a href="https://good-ways-oil.ru/price-list">Прайс-лист</a>
+      <a href="https://good-ways-oil.ru/warranty">Гарантия</a>
     </nav>
-    <a class="nav__tel mono" href="tel:+78007757870">+7 (800) 775-78-70</a>
+    <div class="nav__shop">
+      <button class="ibtn" type="button" id="searchOpen" aria-label="Поиск по каталогу" aria-haspopup="dialog" aria-controls="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></button>
+      <a class="ibtn ibtn--d" href="https://good-ways-oil.ru/saved" aria-label="Избранное"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.500 10c0 5.600-7.500 10-7.500 10Z"/></svg></a>
+      <a class="ibtn ibtn--d" href="https://good-ways-oil.ru/login" aria-label="Личный кабинет"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.200" r="3.700"/><path d="M4.800 20c.7-3.600 3.600-5.600 7.200-5.600s6.500 2 7.200 5.600"/></svg></a>
+      <a class="ibtn" href="https://good-ways-oil.ru/cart" aria-label="Корзина"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.500 4.500h2.300l2 10.300h9.700l1.800-7.300H6.700"/><circle cx="9.200" cy="18.700" r="1.300"/><circle cx="16.300" cy="18.700" r="1.300"/></svg></a>
+    </div>
     <a class="btn btn--sm" href="#contact" data-magnet><span>Оставить заявку</span></a>
     <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </header>
 
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Поиск по каталогу" hidden>
+  <div class="search__panel">
+    <div class="wrap">
+      <div class="search__bar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.500"/><path d="m16 16 4.500 4.500"/></svg>
+        <input type="search" id="searchInput" placeholder="5W-40, HVLP, антифриз…" autocomplete="off" spellcheck="false" aria-label="Что ищем">
+        <button class="search__x mono" type="button" id="searchClose">Закрыть</button>
+      </div>
+      <div class="search__chips mono" id="searchChips">
+        <span>Часто ищут</span>
+        <button type="button">5W-40</button><button type="button">10W-40</button><button type="button">5W-30</button><button type="button">15W-40</button><button type="button">HVLP</button><button type="button">GL-5</button><button type="button">Антифриз</button><button type="button">Endure</button><button type="button">Precision</button>
+      </div>
+      <p class="search__meta mono" id="searchMeta" aria-live="polite"></p>
+      <ul class="search__list" id="searchList"></ul>
+    </div>
+  </div>
+</div>
+
 <div class="menu" id="menu" hidden>
   <nav class="menu__links" aria-label="Меню">
-    <a href="#story"><span class="mono">01</span>Компания</a>
-    <a href="#formula"><span class="mono">02</span>Технология</a>
-    <a href="#catalog"><span class="mono">03</span>Каталог</a>
+    <a href="#catalog"><span class="mono">01</span>Каталог</a>
+    <a href="#story"><span class="mono">02</span>Компания</a>
+    <a href="#formula"><span class="mono">03</span>Технология</a>
     <a href="#test"><span class="mono">04</span>Good Ways Test</a>
     <a href="#partners"><span class="mono">05</span>Партнёрам</a>
     <a href="#contact"><span class="mono">06</span>Заявка</a>
   </nav>
+  <div class="menu__shop mono">
+    <a href="https://good-ways-oil.ru/price-list">Прайс-лист</a>
+    <a href="https://good-ways-oil.ru/warranty">Гарантия</a>
+    <a href="https://good-ways-oil.ru/login">Кабинет</a>
+    <a href="https://good-ways-oil.ru/saved">Избранное</a>
+    <a href="https://good-ways-oil.ru/cart">Корзина</a>
+    <a href="https://good-ways-oil.ru/dostavka">Доставка</a>
+  </div>
   <div class="menu__foot mono">
     <a href="tel:+78007757870">+7 (800) 775-78-70</a>
     <a href="mailto:oils@good-ways.ru">oils@good-ways.ru</a>
@@ -477,6 +515,7 @@
   <div class="wrap foot__bot mono"><span>© 2019—2026 Good Ways</span><a href="#top">Наверх ↑</a></div>
 </footer>
 
+<script src="js/catalog.js" defer></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>

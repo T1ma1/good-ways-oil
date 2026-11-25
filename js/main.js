@@ -142,6 +142,69 @@ void main(){
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') { setMenu(false); burger.focus(); } });
 
+  /* ---------- поиск по каталогу (список — js/catalog.js) ---------- */
+  const sBox = $('#search');
+  if (sBox && window.GW_ITEMS) {
+    const cats = window.GW_CATS, shop = 'https://good-ways-oil.ru';
+    const kind = ['Моторное масло дизель грузовик', 'Моторное масло легковой', 'Трансмиссионное масло', 'Гидравлическое масло', 'Антифриз охлаждающая жидкость'];
+    const norm = s => s.toLowerCase().replace(/ё/g, 'е').replace(/[\s\-−–\/.,+]/g, '');
+    const items = window.GW_ITEMS.split('\n').map(l => { const [c, t, u, p] = l.split('|'); const full = kind[c] + ' ' + cats[c][0] + ' ' + t; return { c: +c, t, u: shop + cats[c][1] + u, p: +p, k: norm(full), w: full.split(/\s+/).map(norm) }; });
+    /* «5w40» не должно находить «15W-40»: запрос с цифры сверяем с началом слова */
+    const hit = (it, t) => (/^\d/.test(t) ? it.w.some(w => w.startsWith(t)) : it.k.includes(t));
+    const inp = $('#searchInput'), list = $('#searchList'), meta = $('#searchMeta'), panel = $('.search__panel', sBox);
+    const escH = s => s.replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+    const ARR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+    let cur = -1, lastFocus = null;
+    const rows = () => $$('.sres', list);
+    const setCur = n => { const r = rows(); if (!r.length) return; cur = (n + r.length) % r.length; r.forEach((el, i) => el.classList.toggle('is-cur', i === cur)); r[cur].scrollIntoView({ block: 'nearest' }); };
+    const render = () => {
+      const toks = inp.value.trim().split(/\s+/).map(norm).filter(Boolean);
+      cur = -1;
+      if (!toks.length) { meta.textContent = 'Введите вязкость, серию или тип: «5w40», «endure truck», «гидравлическое»'; list.innerHTML = ''; return; }
+      const whole = toks.join('');
+      const res = items.filter(it => toks.every(t => hit(it, t)) || hit(it, whole));
+      meta.textContent = res.length ? 'Найдено: ' + res.length : 'Такого в каталоге нет. Оставьте заявку — подберём аналог или изготовим партию под задачу.';
+      list.innerHTML = res.slice(0, 12).map((it, i) => `<li><a class="sres" href="${it.u}" style="--i:${i}"><span class="sres__c mono">${cats[it.c][0]}</span><span class="sres__t">${escH(it.t).replace(/(\d+W-\d+)/g, "<span class=\"nb\">$1</span>")}</span><span class="sres__p mono">от ${it.p.toLocaleString('ru-RU')} ₽</span>${ARR}</a></li>`).join('')
+        + (res.length > 12 ? `<li class="sres__more mono">Ещё ${res.length - 12} — уточните запрос</li>` : '');
+    };
+    const openS = () => {
+      if (!sBox.hidden) return;
+      if (burger.getAttribute('aria-expanded') === 'true') setMenu(false);
+      lastFocus = document.activeElement;
+      sBox.hidden = false; document.body.style.overflow = 'hidden';
+      list.classList.add('is-fresh'); render();
+      requestAnimationFrame(() => requestAnimationFrame(() => sBox.classList.add('is-open')));
+      setTimeout(() => inp.focus(), 80);
+    };
+    const closeS = () => {
+      if (sBox.hidden) return;
+      sBox.classList.remove('is-open'); document.body.style.overflow = '';
+      setTimeout(() => { if (!sBox.classList.contains('is-open')) sBox.hidden = true; }, 620);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    $('#searchOpen').addEventListener('click', openS);
+    $('#searchClose').addEventListener('click', closeS);
+    sBox.addEventListener('click', e => { if (e.target === sBox) closeS(); });
+    inp.addEventListener('input', () => { list.classList.remove('is-fresh'); render(); });
+    $('#searchChips').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; inp.value = b.textContent; list.classList.add('is-fresh'); render(); inp.focus(); });
+    addEventListener('keydown', e => {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '');
+      if (sBox.hidden) {
+        if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) { e.preventDefault(); openS(); }
+        return;
+      }
+      if (e.key === 'Escape') { e.preventDefault(); closeS(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); setCur(cur + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setCur(cur - 1); }
+      else if (e.key === 'Enter' && document.activeElement === inp) { const r = rows(); if (r.length) { e.preventDefault(); location.href = r[Math.max(cur, 0)].href; } }
+      else if (e.key === 'Tab') {
+        const f = $$('input,button,a[href]', panel); const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
   /* ---------- счётчики ---------- */
   const fmt = (v, dec) => dec ? v.toFixed(dec).replace('.', ',') : Math.round(v).toLocaleString('ru-RU').replace(/ |\s/g, ' ');
   const countUp = el => {
