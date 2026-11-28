@@ -106,7 +106,7 @@ void main(){
       cv.width = W; cv.height = H; gl.viewport(0, 0, W, H);
     };
     size(); addEventListener('resize', size, { passive: true });
-    const hero = $('.hero');
+    const hero = cv.parentElement;
     hero.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width; ty = 1 - (e.clientY - r.top) / r.height; }, { passive: true });
     new IntersectionObserver(([en]) => { vis = en.isIntersecting; if (vis && !raf) raf = requestAnimationFrame(draw); }).observe(hero);
     document.addEventListener('visibilitychange', () => { if (!document.hidden && vis && !raf) raf = requestAnimationFrame(draw); });
@@ -144,11 +144,11 @@ void main(){
 
   /* ---------- поиск по каталогу (список — js/catalog.js) ---------- */
   const sBox = $('#search');
-  if (sBox && window.GW_ITEMS) {
-    const cats = window.GW_CATS, shop = 'https://good-ways-oil.ru';
-    const kind = ['Моторное масло дизель грузовик', 'Моторное масло легковой', 'Трансмиссионное масло', 'Гидравлическое масло', 'Антифриз охлаждающая жидкость'];
+  if (sBox && window.GW) {
+    const G = window.GW, cats = G.cats, sRoot = root.dataset.root || '';
+    const kw = ['дизель грузовик', 'легковой', 'трансмиссия', 'гидравлика', 'охлаждающая жидкость'];
     const norm = s => s.toLowerCase().replace(/ё/g, 'е').replace(/[\s\-−–\/.,+]/g, '');
-    const items = window.GW_ITEMS.split('\n').map(l => { const [c, t, u, p] = l.split('|'); const full = kind[c] + ' ' + cats[c][0] + ' ' + t; return { c: +c, t, u: shop + cats[c][1] + u, p: +p, k: norm(full), w: full.split(/\s+/).map(norm) }; });
+    const items = G.items.map(it => { const full = it.k + ' ' + cats[it.c][0] + ' ' + kw[it.c] + ' ' + it.n; const pr = it.o.map(o => o[1]).filter(Boolean); return { c: it.c, t: it.n, u: sRoot + it.u.slice(1) + '/', p: pr.length ? Math.min(...pr) : 0, k: norm(full), w: full.split(/\s+/).map(norm) }; });
     /* «5w40» не должно находить «15W-40»: запрос с цифры сверяем с началом слова */
     const hit = (it, t) => (/^\d/.test(t) ? it.w.some(w => w.startsWith(t)) : it.k.includes(t));
     const inp = $('#searchInput'), list = $('#searchList'), meta = $('#searchMeta'), panel = $('.search__panel', sBox);
@@ -164,7 +164,7 @@ void main(){
       const whole = toks.join('');
       const res = items.filter(it => toks.every(t => hit(it, t)) || hit(it, whole));
       meta.textContent = res.length ? 'Найдено: ' + res.length : 'Такого в каталоге нет. Оставьте заявку — подберём аналог или изготовим партию под задачу.';
-      list.innerHTML = res.slice(0, 12).map((it, i) => `<li><a class="sres" href="${it.u}" style="--i:${i}"><span class="sres__c mono">${cats[it.c][0]}</span><span class="sres__t">${escH(it.t).replace(/(\d+W-\d+)/g, "<span class=\"nb\">$1</span>")}</span><span class="sres__p mono">от ${it.p.toLocaleString('ru-RU')} ₽</span>${ARR}</a></li>`).join('')
+      list.innerHTML = res.slice(0, 12).map((it, i) => `<li><a class="sres" href="${it.u}" style="--i:${i}"><span class="sres__c mono">${cats[it.c][0]}</span><span class="sres__t">${escH(it.t).replace(/(\d+W-\d+)/g, "<span class=\"nb\">$1</span>")}</span><span class="sres__p mono">${it.p ? 'от ' + Math.round(it.p).toLocaleString('ru-RU') + ' ₽' : 'по запросу'}</span>${ARR}</a></li>`).join('')
         + (res.length > 12 ? `<li class="sres__more mono">Ещё ${res.length - 12} — уточните запрос</li>` : '');
     };
     const openS = () => {
@@ -226,7 +226,10 @@ void main(){
   $$('[data-rv], .report, [data-count]').forEach(el => io.observe(el));
 
   /* ---------- одометр ---------- */
-  const odo = $('#odo'), story = $('#story');
+  const story = $('#story');
+  let homeScroll = null;
+  if (story) {
+  const odo = $('#odo');
   const DIG = 8, cells = [];
   for (let i = 0; i < DIG; i++) {
     if (i === 2 || i === 5) { const g = document.createElement('span'); g.className = 'odo__gap'; odo.appendChild(g); }
@@ -286,24 +289,7 @@ void main(){
   };
   new IntersectionObserver(([en]) => formula.classList.toggle('is-live', en.isIntersecting)).observe(formula);
 
-  /* ---------- единый обработчик прокрутки ---------- */
-  const dipFill = $('#dipFill'), dipPct = $('#dipPct'), dipLbl = $('#dipLbl');
-  const secs = $$('[data-sec]'), band = $('.why__band'), bandImg = band && $('img', band), paper = $('.test');
-  let lastY = scrollY, ticking = false, secName = '';
-  const onScroll = () => {
-    ticking = false;
-    const y = scrollY, vh = innerHeight, max = document.documentElement.scrollHeight - vh;
-    /* шапка */
-    nav.classList.toggle('is-solid', y > 40);
-    if (Math.abs(y - lastY) > 6) { nav.classList.toggle('is-hidden', y > lastY && y > vh * .6); lastY = y; }
-    /* щуп */
-    const p = clamp(y / max);
-    dipFill.style.setProperty('--p', p.toFixed(4));
-    dipPct.textContent = String(Math.round(p * 100)).padStart(2, '0');
-    let cur = secs[0];
-    for (const s of secs) if (s.getBoundingClientRect().top <= vh * .5) cur = s;
-    if (cur.dataset.sec !== secName) { secName = cur.dataset.sec; dipLbl.textContent = secName; }
-    /* одометр на закреплённой сцене */
+  homeScroll = vh => {
     if (pinned) {
       const r = story.getBoundingClientRect();
       const sp = clamp(-r.top / (r.height - vh));
@@ -311,7 +297,6 @@ void main(){
       setOdo(1e7 * easeIO(clamp(sp / .92)));
       setChap(sp < .34 ? 0 : sp < .67 ? 1 : 2);
     }
-    /* активный шаг формулы: ближайший к середине экрана */
     if (innerWidth >= 960) {
       let best = 0, bd = 1e9;
       steps.forEach((s, i) => { const r = s.getBoundingClientRect(); const d = Math.abs(r.top + r.height / 2 - vh * .52); if (d < bd) { bd = d; best = i; } });
@@ -320,7 +305,27 @@ void main(){
       /* на телефоне капля стоит над шагами: наполняем её целиком, когда она в кадре */
       drop.style.setProperty('--lvl', 1);
     }
-    /* мягкий сдвиг фото в полосе цифр */
+  };
+  }
+
+  /* ---------- единый обработчик прокрутки ---------- */
+  const dipFill = $('#dipFill'), dipPct = $('#dipPct'), dipLbl = $('#dipLbl');
+  const secs = $$('[data-sec]'), band = $('.why__band'), bandImg = band && $('img', band);
+  let lastY = scrollY, ticking = false, secName = '';
+  const onScroll = () => {
+    ticking = false;
+    const y = scrollY, vh = innerHeight, max = document.documentElement.scrollHeight - vh;
+    nav.classList.toggle('is-solid', y > 40);
+    if (Math.abs(y - lastY) > 6) { nav.classList.toggle('is-hidden', y > lastY && y > vh * .6); lastY = y; }
+    if (dipFill && secs.length) {
+      const p = clamp(y / max);
+      dipFill.style.setProperty('--p', p.toFixed(4));
+      dipPct.textContent = String(Math.round(p * 100)).padStart(2, '0');
+      let cur = secs[0];
+      for (const s of secs) if (s.getBoundingClientRect().top <= vh * .5) cur = s;
+      if (cur.dataset.sec !== secName) { secName = cur.dataset.sec; dipLbl.textContent = secName; }
+    }
+    if (homeScroll) homeScroll(vh);
     if (bandImg && !reduce) {
       const r = band.getBoundingClientRect();
       if (r.bottom > 0 && r.top < vh) bandImg.style.setProperty('--py', (((r.top + r.height / 2) - vh / 2) * -.08).toFixed(1) + 'px');
@@ -341,7 +346,7 @@ void main(){
       b.addEventListener('pointerleave', () => { b.style.setProperty('--bx', '0px'); b.style.setProperty('--by', '0px'); });
     });
     /* свет под курсором на карточках */
-    $$('.label, [data-spot]').forEach(c => c.addEventListener('pointermove', e => {
+    $$('.label, .pcard, .ccard, [data-spot]').forEach(c => c.addEventListener('pointermove', e => {
       const r = c.getBoundingClientRect();
       c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
     }));
@@ -395,27 +400,4 @@ void main(){
   const pipe = $('.pipe');
   if (pipe) { const setPipe = () => pipe.style.setProperty('--pipe-h', (pipe.offsetHeight - 60) + 'px'); setPipe(); addEventListener('resize', setPipe, { passive: true }); }
 
-  /* ---------- форма ---------- */
-  const form = $('#form'), msg = $('#formMsg');
-  if (form) {
-    $$('.fld input, .fld textarea', form).forEach(f => {
-      const sync = () => f.parentElement.classList.toggle('has-val', !!f.value);
-      f.addEventListener('input', () => { sync(); f.parentElement.classList.remove('is-err'); }); f.addEventListener('blur', sync); sync();
-    });
-    form.agree.addEventListener('change', () => form.agree.parentElement.classList.remove('is-err'));
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const bad = [];
-      if (!form.name.value.trim()) bad.push(form.name);
-      if (form.phone.value.replace(/\D/g, '').length < 10) bad.push(form.phone);
-      bad.forEach(f => f.parentElement.classList.add('is-err'));
-      if (!form.agree.checked) form.agree.parentElement.classList.add('is-err');
-      if (bad.length) { msg.textContent = 'Укажите имя и телефон — без них не сможем перезвонить.'; bad[0].focus(); return; }
-      if (!form.agree.checked) { msg.textContent = 'Нужно согласие на обработку персональных данных.'; return; }
-      /* демо без сервера: заявка уходит через почтовую программу посетителя */
-      const body = `ФИО: ${form.name.value}\nТелефон: ${form.phone.value}\nПочта: ${form.email.value}\n\n${form.msg.value}`;
-      location.href = 'mailto:oils@good-ways.ru?subject=' + encodeURIComponent('Заявка с сайта Good Ways') + '&body=' + encodeURIComponent(body);
-      msg.textContent = 'Открыли письмо в вашей почтовой программе — осталось нажать «Отправить».';
-    });
-  }
 })();

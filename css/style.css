@@ -156,7 +156,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .chap h2{font:600 clamp(1.4rem,2.5vw,2.4rem)/1.06 var(--f-d);letter-spacing:-.025em;text-transform:uppercase;margin-bottom:14px}
 .chap p{color:#cfcac2;max-width:48ch}
 @media (min-width:960px){
-  .story.is-pinned{height:340vh}
+  .story.is-pinned{height:270vh}
   .story.is-pinned .story__pin{position:sticky;top:0;height:100vh;padding:0;display:flex;align-items:center}
 }
 /* без закрепления: главы идут списком */

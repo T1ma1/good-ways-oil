@@ -1,0 +1,361 @@
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" data-sec="Старт">
+  <canvas class="hero__gl" id="gl" aria-hidden="true"></canvas>
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="wrap hero__in">
+    <p class="eyebrow mono hero__eye"><i class="dot"></i>Производство моторных масел · Пушкино, Московская область</p>
+    <h1 class="hero__title">
+      <span class="ln"><span>Масло, которое</span></span>
+      <span class="ln"><span>прошло <em>10&nbsp;000&nbsp;000</em>&nbsp;км</span></span>
+      <span class="ln"><span>до вашего двигателя</span></span>
+    </h1>
+    <div class="hero__row">
+      <p class="hero__lead">Мы выросли из транспортной компании и&nbsp;до&nbsp;сих пор испытываем каждую рецептуру дважды: в&nbsp;лаборатории и&nbsp;в&nbsp;рейсах собственного автопарка.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#contact" data-magnet><span>Подобрать масло</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn--ghost" href="#catalog" data-magnet><span>Смотреть каталог</span></a>
+      </div>
+    </div>
+    <ul class="hero__stats">
+      <li><b><span data-count="7">7</span> лет</b><span>на рынке</span></li>
+      <li><b><span data-count="1000">1000</span> т</b><span>производим в&nbsp;месяц</span></li>
+      <li><b><span data-count="50">50</span></b><span>федеральных клиентов</span></li>
+      <li><b><span data-count="158">158</span></b><span>наименований в&nbsp;линейке</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CATALOG ============ -->
+<section class="catalog" id="catalog" data-sec="Каталог">
+  <div class="wrap">
+    <div class="catalog__head">
+      <div>
+        <p class="eyebrow mono"><i class="dot"></i>01 — Продуктовая линейка</p>
+        <h2 class="h2" data-rv><span class="ln"><span>От легковой</span></span><span class="ln"><span>до газопоршневой</span></span></h2>
+      </div>
+      <div class="big158" aria-label="158 наименований">
+        <b><span data-count="158">158</span></b>
+        <span>наименований: моторные, трансмиссионные и&nbsp;гидравлические масла, антифризы, смазки для промышленности</span>
+      </div>
+    </div>
+
+    <ul class="cats" id="cats">
+      <li><a class="cat" href="motornye-masla-dlya-tnt/" data-img="assets/img/truck.jpg">
+        <span class="cat__n mono">01</span><span class="cat__t">Тяжелонагруженная техника</span>
+        <span class="cat__sub">Евро-5/6, низкая зольность · универсальные дизельные · техника прошлых поколений</span>
+        <svg class="cat__arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a class="cat" href="motornye-masla-dlya-legkovyh-avtomobilej/" data-img="assets/img/mechanic.jpg">
+        <span class="cat__n mono">02</span><span class="cat__t">Легковые автомобили</span>
+        <span class="cat__sub">Премиальная синтетика · сервисная полусинтетика · минеральные масла</span>
+        <svg class="cat__arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a class="cat" href="transmissionnye-masla/" data-img="assets/img/canisters.jpg">
+        <span class="cat__n mono">03</span><span class="cat__t">Трансмиссионные масла</span>
+        <span class="cat__sub">GL-4 для МКПП · GL-5 для мостов и&nbsp;редукторов · GL-5 LS для самоблоков</span>
+        <svg class="cat__arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a class="cat" href="gidravlicheskie-masla/" data-img="assets/img/warehouse.jpg">
+        <span class="cat__n mono">04</span><span class="cat__t">Гидравлические масла</span>
+        <span class="cat__sub">HLP для стабильных температур · HVLP для широкого диапазона · МГЕ для спецтехники</span>
+        <svg class="cat__arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a class="cat" href="antifrizy/" data-img="assets/img/lab.jpg">
+        <span class="cat__n mono">05</span><span class="cat__t">Антифризы</span>
+        <span class="cat__sub">Карбоксилатные G12/G12+ · силикатные G11</span>
+        <svg class="cat__arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+    </ul>
+    <div class="cats__all"><a class="btn" href="catalog/" data-magnet><span>Весь каталог — {{count}} продуктов</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn--ghost" href="price-list/"><span>Прайс-лист</span></a></div>
+  </div>
+  <div class="peek" id="peek" aria-hidden="true"><img alt="" id="peekImg"></div>
+
+  <div class="wrap hits__head">
+    <h3 class="h3">Хиты продаж — в&nbsp;розницу и&nbsp;оптом</h3>
+    <div class="hits__ctl">
+      <button type="button" class="rbtn" id="railPrev" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="rbtn" id="railNext" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="rail" id="rail" tabindex="0" aria-label="Хиты продаж">
+    <a class="label" href="motornye-masla-dlya-tnt/motornoe-maslo-good-ways-endure-truck-sae-5w-40/">
+      <span class="label__top mono"><i>Endure Truck</i><i>API CK-4</i></span>
+      <b class="label__v">5W-40</b>
+      <span class="label__type">Синтетическое дизельное масло для двигателей Euro&nbsp;6</span>
+      <span class="label__bot"><span class="mono">5 · 20 · 205 л</span><span class="label__price">от 5 914 ₽</span></span>
+    </a>
+    <a class="label" href="motornye-masla-dlya-tnt/motornoe-maslo-good-ways-endure-truck-sae-10w-40/">
+      <span class="label__top mono"><i>Endure Truck</i><i>Дизель</i></span>
+      <b class="label__v">10W-40</b>
+      <span class="label__type">Моторное масло для тяжелонагруженной техники</span>
+      <span class="label__bot"><span class="mono">Good Ways</span><span class="label__price">от 5 099 ₽</span></span>
+    </a>
+    <a class="label" href="motornye-masla-dlya-tnt/motornoe-maslo-good-ways-endure-truck-sae-5w-30/">
+      <span class="label__top mono"><i>Endure Truck</i><i>Дизель</i></span>
+      <b class="label__v">5W-30</b>
+      <span class="label__type">Моторное масло для тяжелонагруженной техники</span>
+      <span class="label__bot"><span class="mono">Good Ways</span><span class="label__price">от 5 099 ₽</span></span>
+    </a>
+    <a class="label label--hyd" href="hvlp/">
+      <span class="label__top mono"><i>Hydra HVLP</i><i>Гидравлика</i></span>
+      <b class="label__v">ISO 46</b>
+      <span class="label__type">Гидравлическое масло для широкого диапазона температур</span>
+      <span class="label__bot"><span class="mono">32 · 46 · 68</span><span class="label__price">от 10 836 ₽</span></span>
+    </a>
+    <a class="label label--hyd" href="gidravlicheskie-masla/hlp/">
+      <span class="label__top mono"><i>Hydra HLP</i><i>Гидравлика</i></span>
+      <b class="label__v">ISO 46</b>
+      <span class="label__type">Гидравлическое масло для стабильных рабочих температур</span>
+      <span class="label__bot"><span class="mono">32 · 46 · 68</span><span class="label__price">от 8 842 ₽</span></span>
+    </a>
+    <a class="label label--hyd" href="gidravlicheskie-masla/mge-industrialnye/">
+      <span class="label__top mono"><i>МГЕ</i><i>Спецтехника</i></span>
+      <b class="label__v">МГЕ 46</b>
+      <span class="label__type">Гидравлическое масло для спецтехники</span>
+      <span class="label__bot"><span class="mono">Good Ways</span><span class="label__price">от 8 842 ₽</span></span>
+    </a>
+    <a class="label label--cool" href="antifrizy/g12/">
+      <span class="label__top mono"><i>Coolant Red</i><i>Антифриз</i></span>
+      <b class="label__v">G12+</b>
+      <span class="label__type">Карбоксилатный антифриз, защита до&nbsp;−40&nbsp;°C</span>
+      <span class="label__bot"><span class="mono">−40 °C</span><span class="label__price">от 6 848 ₽</span></span>
+    </a>
+    <a class="label label--cool" href="antifrizy/g11/">
+      <span class="label__top mono"><i>Coolant Green</i><i>Антифриз</i></span>
+      <b class="label__v">G11</b>
+      <span class="label__type">Силикатный антифриз, защита до&nbsp;−40&nbsp;°C</span>
+      <span class="label__bot"><span class="mono">−40 °C</span><span class="label__price">от 6 848 ₽</span></span>
+    </a>
+    <a class="label label--all" href="price-list/">
+      <span class="label__top mono"><i>Прайс-лист</i><i>Опт и розница</i></span>
+      <b class="label__v">Все 158</b>
+      <span class="label__type">Полный прайс-лист с&nbsp;фасовками и&nbsp;ценами</span>
+      <span class="label__bot"><span class="mono">Открыть</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+    </a>
+  </div>
+
+  <div class="mq" aria-label="Допуски OEM масла Endure Truck 5W-40">
+    <div class="mq__track mono">
+      <span>Endure Truck 5W-40 · допуски OEM</span><i></i><span>MB 228.31</span><i></i><span>MAN M 3575</span><i></i><span>MAN M 3775</span><i></i><span>Volvo VDS-4.5</span><i></i><span>Cummins CES 20086</span><i></i><span>Cat ECF-3</span><i></i><span>MACK EOS-4.5</span><i></i><span>Deutz DQC III-10 LA</span><i></i><span>MTU Cat. 2.1</span><i></i><span>Renault RLD-3</span><i></i><span>JASO DH-2</span><i></i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY: одометр ============ -->
+<section class="story" id="story" data-sec="Компания">
+  <div class="story__pin">
+    <div class="wrap story__grid">
+      <div class="story__left">
+        <p class="eyebrow mono"><i class="dot"></i>02 — От логистики к производству</p>
+        <div class="odo" role="img" aria-label="Более 10 000 000 км пройдено на нашем масле">
+          <div class="odo__win" id="odo"></div>
+          <span class="odo__unit">км</span>
+        </div>
+        <p class="odo__cap">пройдено на нашем масле. Пробки, дальние рейсы, экстремальные нагрузки — всё это наш испытательный стенд.</p>
+        <div class="road" aria-hidden="true">
+          <svg viewBox="0 0 600 60" preserveAspectRatio="none"><path class="road__bg" d="M0 30H600"/><path class="road__fg" id="roadFg" pathLength="1" d="M0 30H600"/></svg>
+          <span class="road__truck" id="roadTruck"><svg viewBox="0 0 64 28"><path d="M1 3h38v17H1zM39 8h13l10 7v5H39z" /><circle cx="12" cy="22" r="4.5"/><circle cx="29" cy="22" r="4.5"/><circle cx="52" cy="22" r="4.5"/></svg></span>
+          <div class="road__marks mono"><span>2019</span><span>Простои</span><span>Своё производство</span></div>
+        </div>
+      </div>
+      <div class="story__right">
+        <div class="story__frame">
+          <img class="is-on" src="assets/img/truck.jpg" alt="Фура Good Ways в рейсе на закате" width="966" height="354" loading="lazy">
+          <img src="assets/img/mechanic.jpg" alt="Механик заливает масло Good Ways в двигатель" width="966" height="354" loading="lazy">
+          <img src="assets/img/warehouse.jpg" alt="Склад готовой продукции Good Ways" width="966" height="354" loading="lazy">
+          <span class="story__idx mono" id="storyIdx">01 / 03</span>
+        </div>
+        <div class="story__chapters">
+          <article class="chap is-on">
+            <h2>Начинали <br>с перевозок</h2>
+            <p>Больше семи лет наша транспортная компания круглосуточно возит грузы федеральных клиентов по&nbsp;России и&nbsp;СНГ. Бизнес держится на&nbsp;одном: машина выходит в&nbsp;рейс точно в&nbsp;срок.</p>
+          </article>
+          <article class="chap">
+            <h2>Чужие масла <br>нас подвели</h2>
+            <p>Некачественные масла других производителей заканчивались простоями и&nbsp;ремонтами на&nbsp;миллионы рублей. Стало ясно: качество расходников решает, поедет техника или встанет.</p>
+          </article>
+          <article class="chap">
+            <h2>Построили <br>своё производство</h2>
+            <p>С&nbsp;контролем каждого этапа и&nbsp;собственными технологическими картами. Шесть лет доводим рецептуры на&nbsp;своём автопарке — от&nbsp;Юга до&nbsp;Дальнего Востока.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMULA ============ -->
+<section class="formula" id="formula" data-sec="Технология">
+  <div class="wrap formula__grid">
+    <div class="formula__vis">
+      <div class="drop" id="drop" style="--lvl:.25">
+        <svg class="drop__ring" viewBox="0 0 400 400" aria-hidden="true">
+          <circle cx="200" cy="200" r="190" class="drop__ticks"/>
+          <circle cx="200" cy="200" r="170" class="drop__orbit"/>
+          <circle cx="200" cy="200" r="170" class="drop__arc" id="dropArc" pathLength="1"/>
+        </svg>
+        <svg class="drop__svg" viewBox="0 0 200 260" aria-hidden="true">
+          <defs>
+            <clipPath id="dropClip"><path d="M100 6C100 6 22 104 22 164a78 78 0 0 0 156 0C178 104 100 6 100 6Z"/></clipPath>
+            <linearGradient id="oilGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".35" stop-color="#ff6a00"/><stop offset="1" stop-color="#7a2300"/></linearGradient>
+          </defs>
+          <g clip-path="url(#dropClip)">
+            <rect width="200" height="260" fill="#161514"/>
+            <g class="drop__level">
+              <path class="drop__wave drop__wave--b" d="M-200 0q25-12 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0V300H-200Z" fill="#b84300" opacity=".55"/>
+              <path class="drop__wave" d="M-200 0q25 10 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0V300H-200Z" fill="url(#oilGrad)"/>
+            </g>
+            <ellipse cx="68" cy="120" rx="10" ry="34" fill="#fff" opacity=".1" transform="rotate(18 68 120)"/>
+          </g>
+          <path d="M100 6C100 6 22 104 22 164a78 78 0 0 0 156 0C178 104 100 6 100 6Z" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.2"/>
+        </svg>
+        <div class="drop__read mono"><span id="dropStep">01 / 04</span><b id="dropName">Базовые масла</b></div>
+      </div>
+    </div>
+    <div class="formula__body">
+      <p class="eyebrow mono"><i class="dot"></i>03 — Что в основе</p>
+      <h2 class="h2" data-rv><span class="ln"><span>Четыре слоя,</span></span><span class="ln"><span>из которых собрано</span></span><span class="ln"><span>каждое масло</span></span></h2>
+      <ol class="steps">
+        <li class="step is-on" data-step="0" data-name="Базовые масла">
+          <span class="step__n mono">01</span>
+          <div><h3>Базовые масла</h3><p>Импортные PAO и&nbsp;лучшие российские масла III&nbsp;группы. Берём сырьё только у&nbsp;поставщиков с&nbsp;заслуженной репутацией.</p><span class="tag mono">PAO + III группа</span></div>
+        </li>
+        <li class="step" data-step="1" data-name="Рецептура">
+          <span class="step__n mono">02</span>
+          <div><h3>Рецептура</h3><p>Технологи работают и&nbsp;с&nbsp;готовыми пакетами присадок, и&nbsp;с&nbsp;отдельными компонентами — пока масло не&nbsp;выйдет на&nbsp;требования OEM-допусков.</p><span class="tag mono">Собственные техкарты</span></div>
+        </li>
+        <li class="step" data-step="2" data-name="Лаборатория">
+          <span class="step__n mono">03</span>
+          <div><h3>Лабораторный контроль</h3><p>Своя лаборатория проверяет каждое сырьё на&nbsp;входе и&nbsp;каждую партию готового масла на&nbsp;выходе. На&nbsp;каждую отгрузку — паспорт качества.</p><span class="tag mono">ГОСТ Р ISO 9001-2015</span></div>
+        </li>
+        <li class="step" data-step="3" data-name="Реальный ресурс">
+          <span class="step__n mono">04</span>
+          <div><h3>Реальный ресурс</h3><p>На&nbsp;PAO-маслах — до&nbsp;100&nbsp;000&nbsp;км для коммерческого транспорта. Цифра не&nbsp;из&nbsp;буклета: автопарк накатывает больше 1,5&nbsp;млн&nbsp;км в&nbsp;год.</p><span class="tag mono">до 100 000 км</span></div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEST (светлая) ============ -->
+<section class="test" id="test" data-sec="Good Ways Test">
+  <div class="wrap test__grid">
+    <div class="test__copy">
+      <p class="eyebrow mono"><i class="dot"></i>04 — Программа Good Ways Test</p>
+      <h2 class="h2" data-rv><span class="ln"><span>Диагностика</span></span><span class="ln"><span>масла — это</span></span><span class="ln"><span>диагностика</span></span><span class="ln"><span><em>техники</em></span></span></h2>
+      <p class="test__lead">По&nbsp;капле отработанного масла видно, что происходит внутри двигателя: износ, загрязнения и&nbsp;остаток ресурса. Раньше, чем техника встанет.</p>
+      <ol class="pipe">
+        <li><span class="pipe__n mono">01</span><div><h3>Берём пробу</h3><p>Отбираем масло прямо из&nbsp;работающего узла — в&nbsp;реальных условиях эксплуатации.</p></div></li>
+        <li><span class="pipe__n mono">02</span><div><h3>Отправляем в&nbsp;лабораторию</h3><p>Анализ делает аккредитованная лаборатория МИЦ&nbsp;ГСМ.</p></div></li>
+        <li><span class="pipe__n mono">03</span><div><h3>Читаем отчёт вместе</h3><p>Состояние двигателя, риски поломок и&nbsp;оптимальный интервал замены.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="report" id="report">
+      <div class="report__scan" aria-hidden="true"></div>
+      <header class="report__head mono">
+        <span><i class="dot"></i>Отчёт по пробе масла</span>
+        <span>Газопоршневая установка</span>
+      </header>
+      <div class="report__rows">
+        <div class="rrow"><span class="rrow__k"><b>Fe</b>Железо · износ гильз</span><span class="rrow__bar"><i style="--w:.34"></i></span><span class="rrow__s mono">норма</span></div>
+        <div class="rrow"><span class="rrow__k"><b>Cu</b>Медь · подшипники</span><span class="rrow__bar"><i style="--w:.22"></i></span><span class="rrow__s mono">норма</span></div>
+        <div class="rrow"><span class="rrow__k"><b>Al</b>Алюминий · поршни</span><span class="rrow__bar"><i style="--w:.28"></i></span><span class="rrow__s mono">норма</span></div>
+        <div class="rrow"><span class="rrow__k"><b>Si</b>Кремний · пыль</span><span class="rrow__bar"><i style="--w:.41"></i></span><span class="rrow__s mono">норма</span></div>
+        <div class="rrow rrow--bad"><span class="rrow__k"><b>Na</b>Натрий · антифриз</span><span class="rrow__bar"><i style="--w:.93"></i></span><span class="rrow__s mono">превышение</span></div>
+        <div class="rrow"><span class="rrow__k"><b>TBN</b>Щелочное число · ресурс</span><span class="rrow__bar"><i style="--w:.58"></i></span><span class="rrow__s mono">в допуске</span></div>
+      </div>
+      <footer class="report__verdict">
+        <span class="mono">Вывод лаборатории</span>
+        <p>В&nbsp;масло попадает антифриз. <b>Клиент устранил неисправность до&nbsp;капитального ремонта</b> газопоршневой установки.</p>
+      </footer>
+      <span class="report__note mono">Схема отчёта по реальному случаю, шкалы условные</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЦИФРЫ / ПРЕИМУЩЕСТВА ============ -->
+<section class="why" id="why" data-sec="Качество">
+  <div class="why__band">
+    <img src="assets/img/drums.jpg" alt="Площадка с бочками готовой продукции" loading="lazy" width="1680" height="1120">
+    <div class="wrap why__nums">
+      <div><b><span data-count="7">7</span></b><span>лет без рекламаций</span></div>
+      <div><b><span data-count="1000">1000</span></b><span>тонн масла в&nbsp;месяц</span></div>
+      <div><b><span data-count="1.5" data-dec="1">1,5</span>+</b><span>млн км в&nbsp;год на&nbsp;своём автопарке</span></div>
+      <div><b><span data-count="100">100</span> 000</b><span>км — ресурс PAO-масел в&nbsp;коммерческом транспорте</span></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="why__head">
+      <p class="eyebrow mono"><i class="dot"></i>05 — Почему с нами работают</p>
+      <h2 class="h2" data-rv><span class="ln"><span>Отвечаем за масло,</span></span><span class="ln"><span>потому что сами на нём ездим</span></span></h2>
+    </div>
+    <div class="cards">
+      <article class="card" data-spot>
+        <span class="card__n mono">A</span>
+        <h3>Качество проверяем сами</h3>
+        <p>Собственная лаборатория: входной контроль сырья и&nbsp;тестирование каждой партии. К&nbsp;каждому отгруженному продукту — паспорт качества и&nbsp;декларация соответствия.</p>
+      </article>
+      <article class="card" data-spot>
+        <span class="card__n mono">B</span>
+        <h3>Опыт перевозчика работает на&nbsp;вас</h3>
+        <p>Масла накатаны на&nbsp;разной технике от&nbsp;Юга до&nbsp;Дальнего Востока. Мы знаем цену простоя, потому что сами считали её в&nbsp;миллионах.</p>
+      </article>
+      <article class="card" data-spot>
+        <span class="card__n mono">C</span>
+        <h3>Без наценки за&nbsp;бренд</h3>
+        <p>Считаем рынок, поставщиков и&nbsp;собственные расходы, чтобы давать премиальное качество без переплаты за&nbsp;имя на&nbsp;канистре.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="partners" id="partners" data-sec="Партнёрам">
+  <div class="wrap partners__grid">
+    <div class="partners__copy">
+      <p class="eyebrow mono"><i class="dot"></i>06 — Поставки для бизнеса</p>
+      <h2 class="h2" data-rv><span class="ln"><span>Чем дольше</span></span><span class="ln"><span>работаем,</span></span><span class="ln"><span>тем ниже цена</span></span></h2>
+      <ul class="plist">
+        <li><span class="mono">Скидки</span><p>Растут с&nbsp;объёмом закупок и&nbsp;сроком сотрудничества.</p></li>
+        <li><span class="mono">Логистика</span><p>Собственный автопарк — доставка по&nbsp;всей России.</p></li>
+        <li><span class="mono">Поддержка 24/7</span><p>Технические консультации, тренинги, помощь в&nbsp;подборе.</p></li>
+      </ul>
+      <a class="btn" href="#contact" data-magnet><span>Стать партнёром</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="partners__vis" data-rv>
+      <div class="shot">
+        <img src="assets/img/canisters.jpg" alt="Канистры и бочка моторного масла Good Ways" loading="lazy" width="966" height="354">
+      </div>
+      <ol class="flow mono">
+        <li><b>01</b>Подберём продукт под задачу</li>
+        <li><b>02</b>Пришлём образцы и&nbsp;документацию</li>
+        <li><b>03</b>Заключим договор</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact" data-sec="Заявка">
+  <div class="wrap contact__grid">
+    <div class="contact__copy">
+      <p class="eyebrow mono"><i class="dot"></i>07 — Заявка</p>
+      <h2 class="h2 h2--xl" data-rv><span class="ln"><span>Обсудим</span></span><span class="ln"><span>ваш парк?</span></span></h2>
+      <p>Расскажите, какая у&nbsp;вас техника и&nbsp;в&nbsp;каких условиях она работает. Подберём масло, пришлём образцы и&nbsp;техническую документацию.</p>
+      <div class="contact__direct mono">
+        <a href="tel:+78007757870">+7 (800) 775-78-70</a>
+        <a href="mailto:oils@good-ways.ru">oils@good-ways.ru</a>
+        <a href="https://t.me/pasoldatov" target="_blank" rel="noopener">Telegram →</a>
+      </div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <label class="fld"><span>Ваше ФИО</span><input type="text" name="name" autocomplete="name" required></label>
+      <div class="form__two">
+        <label class="fld"><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required></label>
+        <label class="fld"><span>Почта</span><input type="email" name="email" autocomplete="email"></label>
+      </div>
+      <label class="fld"><span>Какая техника и какой вопрос</span><textarea name="msg" rows="3"></textarea></label>
+      <label class="chk"><input type="checkbox" name="agree" required><i></i><span>Согласен на&nbsp;<a href="https://good-ways-oil.ru/consent" target="_blank" rel="noopener">обработку персональных данных</a> и&nbsp;принимаю <a href="https://good-ways-oil.ru/policy" target="_blank" rel="noopener">политику конфиденциальности</a></span></label>
+      <div class="form__foot">
+        <button class="btn" type="submit" data-magnet><span>Отправить заявку</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="form__msg mono" id="formMsg" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
