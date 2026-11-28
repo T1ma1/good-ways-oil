@@ -105,7 +105,7 @@ ${o.prod && !o.noindex ? '' : '<meta name="robots" content="noindex, nofollow">\
 <link rel="stylesheet" href="${root}css/fonts.css">
 <link rel="stylesheet" href="${root}css/style.css">
 <link rel="stylesheet" href="${root}css/shop.css">
-<script>document.documentElement.classList.add('js');${home ? "try{if(sessionStorage.getItem('gw-seen'))document.documentElement.classList.add('seen')}catch(e){}" : ''}</script>
+<script>document.documentElement.classList.add('js');${home ? "try{if(sessionStorage.getItem('gw-seen')&&!/[?&]intro/.test(location.search))document.documentElement.classList.add('seen')}catch(e){}" : ''}</script>
 ${o.ld ? `<script type="application/ld+json">${JSON.stringify(o.ld)}</script>\n` : ''}</head>
 <body>
 
@@ -113,8 +113,28 @@ ${o.ld ? `<script type="application/ld+json">${JSON.stringify(o.ld)}</script>\n`
 <a class="skip" href="#main">К содержанию</a>
 ${home ? `
 <div class="loader" aria-hidden="true">
-  <div class="loader__mark"><svg class="loader__ghost"><use href="#gmark"/></svg><svg class="loader__fill"><use href="#gmark"/></svg></div>
-  <div class="loader__row mono"><span>Good Ways Oil</span><span class="loader__num">000</span></div>
+  <div class="loader__stage">
+    <svg class="loader__mark" viewBox="0 0 139 136">
+      <defs>
+        <clipPath id="ldClip"><path d="${GMARK}"/></clipPath>
+        <linearGradient id="ldGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".28" stop-color="#ff6a00"/><stop offset="1" stop-color="#c23c00"/></linearGradient>
+      </defs>
+      <use class="loader__ghost" href="#gmark"/>
+      <g clip-path="url(#ldClip)"><g class="loader__lvl">
+        <path class="loader__w loader__w--b" d="M-92 0q11.500 5 23 0t23 0 23 0 23 0 23 0 23 0 23 0 23 0 23 0 23 0 23 0V170H-92Z"/>
+        <path class="loader__w" fill="url(#ldGrad)" d="M-92 0q11.500-5 23 0t23 0 23 0 23 0 23 0 23 0 23 0 23 0 23 0 23 0 23 0V170H-92Z"/>
+      </g></g>
+    </svg>
+    <i class="loader__drop"></i><i class="loader__ring"></i>
+  </div>
+  <div class="loader__row">
+    <span class="mono">Good Ways Oil</span>
+    <span class="loader__km"><span class="loader__num"><b>0</b> <i>км</i></span><span class="mono">пройдено на нашем масле</span></span>
+  </div>
+  <div class="loader__flood">
+    <svg class="loader__edge loader__edge--t" viewBox="0 0 2400 100" preserveAspectRatio="none"><path d="M0 100V55Q150 5 300 50T600 50T900 50T1200 55Q1350 5 1500 50T1800 50T2100 50T2400 55V100Z"/></svg>
+    <svg class="loader__edge loader__edge--b" viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0 0H1200V30Q1140 62 1080 32Q1030 8 980 36Q945 100 905 38Q850 2 790 30Q730 60 670 30Q620 6 570 34Q540 84 505 34Q440 0 370 30Q310 64 250 30Q200 4 150 34Q118 96 85 34Q40 4 0 30Z"/></svg>
+  </div>
 </div>` : ''}
 <header class="nav" id="nav">
   <div class="nav__top">

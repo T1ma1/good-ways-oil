@@ -11,29 +11,38 @@
   const easeIO = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
   const easeOut = t => 1 - Math.pow(1 - t, 4);
 
-  /* ---------- прелоадер ---------- */
+  /* ---------- интро: капля, знак наполняется маслом, счётчик километров, заливка экрана ---------- */
   const loader = $('.loader');
   const seen = root.classList.contains('seen') || reduce;
   const ready = () => {
     document.body.classList.add('ready');
     try { sessionStorage.setItem('gw-seen', '1'); } catch (e) {}
-    setTimeout(() => loader && loader.remove(), 1100);
   };
   if (seen || !loader) {
     requestAnimationFrame(() => requestAnimationFrame(ready));
   } else {
-    const num = $('.loader__num'), fill = $('.loader__fill');
-    const t0 = performance.now(), D = 1150;
-    let fontsOk = false;
+    const num = $('.loader__num b'), flood = $('.loader__flood');
+    const t0 = performance.now(), WAIT = 470, D = 1550;
+    const km = v => Math.round(v).toLocaleString('ru-RU').replace(/\s/g, '\u2009');
+    let fontsOk = false, gone = false;
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => (fontsOk = true));
     setTimeout(() => (fontsOk = true), 2200);
+    const fin = () => { if (gone) return; gone = true; ready(); loader.remove(); };
+    const out = () => {
+      if (!flood || !flood.animate) { loader.classList.add('is-out'); return fin(); }
+      flood.animate([{ transform: 'translateY(calc(100% + 13vh))' }, { transform: 'translateY(0)' }], { duration: 620, easing: 'cubic-bezier(.6,0,.9,.5)', fill: 'forwards' }).onfinish = () => {
+        loader.classList.add('is-out'); ready();
+        flood.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(calc(-100% - 13vh))' }], { duration: 840, easing: 'cubic-bezier(.1,.5,.3,1)', fill: 'forwards' }).onfinish = fin;
+      };
+      setTimeout(fin, 3200); /* страховка, если вкладка в фоне и анимация не доиграла */
+    };
     const tick = now => {
-      let p = clamp((now - t0) / D);
-      if (!fontsOk) p = Math.min(p, .88);
-      const e = easeIO(p) * 100;
-      fill.style.setProperty('--p', e.toFixed(1));
-      num.textContent = String(Math.round(e)).padStart(3, '0');
-      if (p < 1) requestAnimationFrame(tick); else setTimeout(ready, 140);
+      let p = clamp((now - t0 - WAIT) / D);
+      if (!fontsOk) p = Math.min(p, .9);
+      const e = easeIO(p);
+      loader.style.setProperty('--p', e.toFixed(4));
+      num.textContent = km(e * 1e7);
+      if (p < 1) requestAnimationFrame(tick); else setTimeout(out, 220);
     };
     requestAnimationFrame(tick);
   }
